@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Police Questionnaire</title>
+		<link rel="stylesheet" href="styles.css">
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	</head>
+
+	<body>
+
+	
+
+		First Name
+		<input id = 'first_name' type='text'>
+		Last Name
+		<input id = 'sur_name' type='text'>
+		Middle Name
+		<input id = 'middle_name' type='text'>
+		Suffix
+		<input id = 'suffix' type='text'>
+		birthday
+		<input id = 'birthday_date' type='text'>
+		Age
+		<input id = 'age' type='text'>
+		Where do you live?
+		<input  id = 'where' type='text'>
+		Place of birth
+		<input  id = 'place' type='text'>
+		Civil Status
+		<input id = 'civil_status' type='text'>
+		Religion
+		<input  id = 'religion' type='text'>
+
+
+		<button type="button" onclick="clickButton( 
+			document.getElementById('first_name').value ,
+			document.getElementById('sur_name').value,
+			document.getElementById('middle_name').value, 
+			document.getElementById('suffix').value ,
+			document.getElementById('birthday_date').value,
+			document.getElementById('age').value ,
+			document.getElementById('where').value ,
+			document.getElementById('place').value,
+			document.getElementById('civil_status').value ,
+			document.getElementById('religion').value )"> Click Me!
+		</button>
+
+		<script>
+
+
+		
+
+		const clickButton = (a,b,c,d,e,f,g,h,i,j) => {
+
+			const postData = {
+				first_name:a,
+				sur_name:b,
+				middle_name:c,
+				suffix:d,
+				birthday_date:e,
+				age:f,
+				where:g,
+				place:h,
+				civil_status:i,
+				religion:j
+
+			};
+
+			console.log(postData)
+
+			const data = {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(postData)
+			}
+	
+			async function fetchData() {
+				try {
+					const response = await fetch('http://127.0.0.1:8000/Survey',data);
+					console.log(response)
+					if (response.data.status =='success') {
+						document.location.href = 'profile.html.html';
+					} else {
+						throw new Error('Failed to fetch data');
+					}
+				} catch (error) {
+					console.error('Error:', error); 
+				}
+			}
+
+			fetchData()
+	
+		}
+
+		</script>
+	</body>
+</html>
+
