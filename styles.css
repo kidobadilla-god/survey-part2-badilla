@@ -145,3 +145,27 @@ p{
 }
 
 
+
+/* ---- login / register ---- */
+input{
+	margin:6px 0 14px 0;
+	padding:8px;
+	font-size:16px;
+}
+
+button{
+	padding:8px 16px;
+	font-size:16px;
+	cursor:pointer;
+	margin:4px;
+}
+
+.message{
+	color:#b00020;
+	min-height:20px;
+	margin:8px 0;
+}
+
+.message.ok{
+	color:#1b7a2b;
+}

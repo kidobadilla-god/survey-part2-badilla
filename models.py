@@ -1,11 +1,11 @@
-from sqlmodel import Field , SQLModel , hashlib
+from sqlmodel import Field, SQLModel
 
 class Survey(SQLModel, table=True):
-    id: int|None = Field(default=None, primary_key=True)
+    id: int | None = Field(default=None, primary_key=True)
     first_name: str
     sur_name: str
     middle_name: str
-    suffix: str|None = None
+    suffix: str | None = None
     birthday_date: str
     age: int
     where: str
@@ -13,17 +13,21 @@ class Survey(SQLModel, table=True):
     civil_status: str
     religion: str
 
-class UserLogin(SQLModel, table=True):
-    id: int|None = Field(default=None, primary_key=True)
+
+
+class User(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    username: str 
+    password: str
+
+
+
+class UserRegister(SQLModel):
     username: str
     password: str
-    
-class UserRegister(SQLModel, table=True):
-    id: int|None = Field(default=None, primary_key=True)
+    confirmed_password: str
+
+
+class UserLogin(SQLModel):
     username: str
     password: str
-    Confirmed_password: str
-    
-
-
-

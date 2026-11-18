@@ -1,72 +1,51 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Police Questionnaire</title>
+		<title>Login</title>
 		<link rel="stylesheet" href="styles.css">
-		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	</head>
 
 	<body>
+		Username
+		<input id='username' type='text'>
+		Password
+		<input id='password' type='password'>
 
-	
+		<div id='message' class='message'></div>
 
-		username
-		<input id = 'username' type='text'>
-		password
-		<input id = 'password' type='text'>
-		
-		<a href="register.html"> Sign up </a>
-        <button type = 'button' href="index.html"> Login </button>
-
-
-		<button type="button" onclick="clickButton( 
-			document.getElementById('username').value ,
-			document.getElementById('password').value )"> Log in!
-		</button>
+		<button type="button" onclick="login()">Log in</button>
+		<a href="register.html">Sign up</a>
 
 		<script>
+			const message = document.getElementById('message');
 
+			async function login() {
+				const postData = {
+					username: document.getElementById('username').value,
+					password: document.getElementById('password').value
+				};
 
-		
-
-		const clickButton = (a,b) => {
-
-			const postData = {
-				username:a,
-				password:b,
-
-
-			};
-
-			console.log(postData)
-
-			const data = {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(postData)
-			}
-	
-			async function fetchData() {
 				try {
-					const response = await fetch('http://127.0.0.1:8000/Survey',data);
-					console.log(response)
-					if (response.data.status =='success') {
+					const response = await fetch('http://127.0.0.1:8000/login', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify(postData)
+					});
+					const result = await response.json();
+
+					if (response.ok && result.status === 'success') {
+						localStorage.setItem('username', result.username);
 						document.location.href = 'index.html';
 					} else {
-						throw new Error('Failed to fetch data');
+						message.className = 'message';
+						message.textContent = result.detail || 'Login failed';
 					}
 				} catch (error) {
-					console.error('Error:', error); 
+					console.error('Error:', error);
+					message.className = 'message';
+					message.textContent = 'Cannot reach the server. Is it running?';
 				}
 			}
-
-			fetchData()
-	
-		}
-
 		</script>
 	</body>
 </html>
-
