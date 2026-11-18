@@ -1,4 +1,4 @@
-from sqlmodel import Field , SQLModel
+from sqlmodel import Field , SQLModel , hashlib
 
 class Survey(SQLModel, table=True):
     id: int|None = Field(default=None, primary_key=True)
@@ -13,8 +13,17 @@ class Survey(SQLModel, table=True):
     civil_status: str
     religion: str
 
-
-
+class UserLogin(SQLModel, table=True):
+    id: int|None = Field(default=None, primary_key=True)
+    username: str
+    password: str
+    
+class UserRegister(SQLModel, table=True):
+    id: int|None = Field(default=None, primary_key=True)
+    username: str
+    password: str
+    Confirmed_password: str
+    
 
 
 
